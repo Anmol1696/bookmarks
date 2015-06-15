@@ -1,13 +1,20 @@
 <html>
 	<head>
-		<title>{{head_title}}</title>
+		<title>Bookmarks</title>
 	</head>
 	<body>
 		<h1>
-			{{page_title}}
+			Welcome to Bookmarks!!
 		</h1>
-		<p>
-			{{page_body}}
-		</p>
+		{% if user.username %}
+			<p>Welcome {{ user.username }}
+			Here you can store and share bookmarks
+			</p>
+			<p><a href = '/logout'>LOGOUT</a></p>
+		{% else %}
+			<p>Welcome
+			You need to <a href = '/login'>login</a> before you can store bookmarks!!
+			</p>
+		{% endif %}
 	</body>
 </html>
