@@ -1,24 +1,20 @@
-<html>
-	<head>
-		<title>Django Bookmarks - User Login</title>
-	</head>
-	<body>
-		<h1>User Login</h1>
-		{% if form.errors %}
-			<p>
-				Your username and password do not match.
-				Please try again.
-			</p>
-		{% endif %}
-		<form method = 'POST' action = "{% url 'django.contrib.auth.views.login' %}">
-			{% csrf_token %}
-			<p><label for = 'id_username'>Username:</lable>
-				{{ form.username }}</p>
-			<p><label for = 'id_password'>Password:</lable>
-				{{ form.password }}</p>
-			<input type = 'hidden' name = 'next' value = '/' />
-			<input type = 'submit' value = 'login' />
-		</form>
-		
-	</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}User Login{% endblock %}
+{% block head %}User Login{% endblock %}
+{% block content %}
+	{% if form.errors %}
+		<p>
+			Your username and password do not match.<br>
+			Please try again.
+		</p>
+	{% endif %}
+	<form method = 'POST' action = "">
+		{% csrf_token %}
+		<p><label for = 'id_username'>Username:</lable>
+			{{ form.username }}</p>
+		<p><label for = 'id_password'>Password:</lable>
+			{{ form.password }}</p>
+		<input type = 'hidden' name = 'next' value = '/' />
+		<input type = 'submit' value = 'login' />
+	</form>
+{% endblock %}

@@ -6,10 +6,11 @@ from django.template import Context, RequestContext
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
+from book.forms import *
 
 
 def main_page(request):
-	return render_to_response('main_page.html', {'user' : request.user}, context_instance = RequestContext(request))
+	return render_to_response('main_page.html', RequestContext(request))
 
 def user_page(request,username):
 	try:
@@ -22,3 +23,14 @@ def user_page(request,username):
 def logout_page(request):
 	logout(request)
 	return HttpResponseRedirect('/')
+
+def register_page(request):
+	if request.method == 'POST':
+		form = RegistrationForm(request.POST)
+		if form.is_valid():
+			user = User.object.create_user(
+				username = form.cleaned_data['username'],
+				password = form.cleaned_data['password1'],
+				email = form .cleaned_data['email']
+			)
+				
