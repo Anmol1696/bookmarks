@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', logout_page),
     url(r'^register/$', register_page),
     url(r'^register/success/$',
-	TemplateView.as_view(template_name = 'registration/register_success.html')
+		TemplateView.as_view(template_name = 'registration/register_success.html')
 	),
-	                                             
+    url(r'^save/$', bookmark_save_page),                                             
 )  

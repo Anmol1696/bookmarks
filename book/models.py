@@ -13,3 +13,5 @@ class Bookmark(models.Model):
 class Tag(models.Model):
 	name = models.CharField(max_length = 64, unique = True)
 	bookmarks = models.ManyToManyField(Bookmark)
+	def __str__(self):
+		return self.name

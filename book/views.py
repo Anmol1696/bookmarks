@@ -7,6 +7,8 @@ from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from book.forms import *
+from book.models import *
+from django.contrib.auth.decorators import login_required
 
 
 def main_page(request):
@@ -41,3 +43,31 @@ def register_page(request):
 		'registration/register.html',
 		variables
 	)
+
+@login_required
+def bookmark_save_page(request):
+	if request.method == 'POST':
+		form = BookmarkSaveForm(request.POST)
+		if form.is_valid():
+			link, dummy = Link.objects.get_or_create(
+				url = form.cleaned_data['url']
+			)
+			bookmark, created = Bookmark.objects.get_or_create(
+				user = request.user,
+				link = link
+			)
+			bookmark.title = form.cleaned_data['title']
+			if not created:
+				bookmark.tag_set.clear()
+			tag_names = form.cleaned_data['tags'].split()
+			for tag_name in tag_names:
+				tag, dummy = Tag.objects.get_or_create(name = tag_name)
+				bookmark.tag_set.add(tag)
+			bookmark.save()
+			return HttpResponseRedirect(
+				'/user/%s/' % request.user.username
+			)
+	else:
+		form = BookmarkSaveForm()
+	variables = RequestContext(request,{ 'form' : form })
+	return render_to_response('bookmark_save.html',variables)

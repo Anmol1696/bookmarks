@@ -14,8 +14,9 @@
 		<div id = 'nav'>
 			<a href = '/'>HOME</a> | 
 			{% if user.is_authenticated %}
-				Welcome {{ user.username }}
-				(<a href = '/logout'>Logout</a>)
+				<a href  ='/save/'>Add Bookmark</a> |
+				<a href = '/user/{{ user.username }}/'>{{ user.username }}</a> |
+				<a href = '/logout'>Logout</a>
 			{% else %}
 				<a href = '/login/'>Login</a> | 
 				<a href = '/register'>Registration</a>
