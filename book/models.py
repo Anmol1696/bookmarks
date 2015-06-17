@@ -12,4 +12,4 @@ class Bookmark(models.Model):
 
 class Tag(models.Model):
 	name = models.CharField(max_length = 64, unique = True)
-	bookmarks = models.ManyToManyFeild(Bookmark)
+	bookmarks = models.ManyToManyField(Bookmark)
