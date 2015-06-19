@@ -1,2 +1,5 @@
 # bookmarks
-Django project for sharing and storing links
+
+Django  project of storing bookmarks.
+
+Work in progress. 
